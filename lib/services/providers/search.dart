@@ -10,7 +10,6 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-
   late String searchBooks;
 
   @override
@@ -27,7 +26,7 @@ class _SearchState extends State<Search> {
               SafeArea(
                 child: Form(
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(15.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -40,15 +39,22 @@ class _SearchState extends State<Search> {
                             }
                             return null;
                           },
-                          onChanged: (value){searchBooks = value;},
+                          onChanged: (value) {
+                            searchBooks = value;
+                          },
                         ),
+                        SizedBox(height: 30),
                         ElevatedButton(
-                            onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return searchPage(search: searchBooks, username: '',);
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return searchPage(
+                                  search: searchBooks,
+                                  username: '',
+                                );
                               }));
                             },
-                            child: Text('Search')),
+                            child: Text('Search a Book')),
                         SizedBox(height: 24), // _buildButtonSubmit(),
                       ],
                     ),
@@ -61,5 +67,4 @@ class _SearchState extends State<Search> {
       ),
     );
   }
-
 }
