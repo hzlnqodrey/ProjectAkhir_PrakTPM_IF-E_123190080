@@ -1,0 +1,1 @@
+ /Users/hzlnqodrey/Developer/Mobile-Project/PrakTPM_IF-E_TugasAkhir_123190080/.dart_tool/flutter_build/32ad2869cc67af9d9e4e5a01ede22b06/native_assets.yaml: 

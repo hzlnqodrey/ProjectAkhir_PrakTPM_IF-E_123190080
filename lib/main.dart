@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import 'screens/login_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'models/boxes.dart';
 import 'models/pengguna.dart';
