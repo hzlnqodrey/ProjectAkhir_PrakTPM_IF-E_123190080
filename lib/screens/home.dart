@@ -199,7 +199,7 @@ class _homePageState extends State<homePage>
                 onPressed: () {
                   _launchURL(link);
                 },
-                child: Text('buy')),
+                child: Text('Buy')),
             SizedBox(
               height: 10,
             )

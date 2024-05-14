@@ -93,7 +93,7 @@ class _searchPageState extends State<searchPage> with SingleTickerProviderStateM
           ),
           ElevatedButton(onPressed: () {
             _launchURL(link);
-          }, child: Text('buy')),
+          }, child: Text('Buy')),
           SizedBox(height: 10,)
 
         ],
