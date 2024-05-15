@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'models/boxes.dart';
 import 'models/pengguna.dart';
 
-void main() async{
+void main() async {
   Hive.initFlutter();
   Hive.registerAdapter(PenggunaAdapter());
   await Hive.openBox<Pengguna>(HiveBoxex.pengguna);
@@ -21,9 +21,12 @@ class MyApp extends StatelessWidget {
       title: 'Login',
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+        ),
       ),
       home: LoginPage(),
-
     );
   }
 }
