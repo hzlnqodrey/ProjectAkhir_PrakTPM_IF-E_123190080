@@ -142,7 +142,13 @@ class _homePageState extends State<homePage>
   }
 
   Widget _buildSuccessSection(BooksModel data) {
-    return ListView.builder(
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 2,
+        mainAxisSpacing: 5,
+        mainAxisExtent: 350,
+      ),
       itemCount: data.books?.length,
       itemBuilder: (BuildContext context, int index) {
         return _buildItemBooks(
@@ -155,138 +161,130 @@ class _homePageState extends State<homePage>
   }
 
   Widget _buildItemBooks(String pic, String title, String price, String link) {
-    return Padding(
-      padding: EdgeInsets.all(15),
+    return InkWell(
       child: Card(
-        /*elevation: 5,*/
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              height: 350,
-              width: 300,
-              child: Image.network(
-                pic,
-                fit: BoxFit.fill,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              price,
-              style: TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  _launchURL(link);
-                },
-                child: Text('Buy')),
-            SizedBox(
-              height: 10,
-            )
-          ],
-        ),
-      ),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.black, width: 1),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Column(children: [
+                Container(
+                  width: double.infinity,
+                  height: 160,
+                  child: Image.network(pic, fit: BoxFit.cover),
+                ),
+                SizedBox(height: 10.0),
+                Expanded(
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.visible,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(price,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        )),
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        _launchURL(link);
+                      },
+                      child: Text("Buy"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.purple[50],
+                      )),
+                )
+              ]))),
     );
   }
-}
 
-Widget _buttonSearch(BuildContext context, String username) {
-  return Container(
-    child: FloatingActionButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Search();
-          }));
-        },
-        child: Icon(
-          Icons.search,
-        )),
-  );
-}
+  Widget _buttonSearch(BuildContext context, String username) {
+    return Container(
+      child: FloatingActionButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Search();
+            }));
+          },
+          child: Icon(
+            Icons.search,
+          )),
+    );
+  }
 
-Widget _buttonHome() {
-  return Container(
-    child: FloatingActionButton(
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        onPressed: () {},
-        child: Icon(
-          Icons.my_library_books_outlined,
-          color: Colors.green,
-        )),
-  );
-}
+  Widget _buttonHome() {
+    return Container(
+      child: FloatingActionButton(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          onPressed: () {},
+          child: Icon(
+            Icons.my_library_books_outlined,
+            color: Colors.green,
+          )),
+    );
+  }
 
-Widget _buttonAbout(
-    BuildContext context, String username, SharedPreferences logindata) {
-  return Container(
-    child: FloatingActionButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        onPressed: () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) {
-            return aboutPage(
-              username: username,
-              logindata: logindata,
-            );
-          }));
-        },
-        child: Icon(
-          Icons.store_mall_directory,
-        )),
-  );
-}
+  Widget _buttonAbout(
+      BuildContext context, String username, SharedPreferences logindata) {
+    return Container(
+      child: FloatingActionButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) {
+              return aboutPage(
+                username: username,
+                logindata: logindata,
+              );
+            }));
+          },
+          child: Icon(
+            Icons.store_mall_directory,
+          )),
+    );
+  }
 
-Widget _buttonProfil(
-    BuildContext context, String username, SharedPreferences logindata) {
-  return Container(
-    child: FloatingActionButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        onPressed: () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) {
-            return ProfilPage(username: username, logindata: logindata);
-          }));
-        },
-        child: Icon(
-          Icons.person,
-        )),
-  );
-}
+  Widget _buttonProfil(
+      BuildContext context, String username, SharedPreferences logindata) {
+    return Container(
+      child: FloatingActionButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) {
+              return ProfilPage(username: username, logindata: logindata);
+            }));
+          },
+          child: Icon(
+            Icons.person,
+          )),
+    );
+  }
 
-_launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
