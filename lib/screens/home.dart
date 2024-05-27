@@ -160,8 +160,6 @@ class _homePageState extends State<homePage>
             "${data.books?[index].price}",
             "${data.books?[index].link}",
             "${data.books?[index].isbn13}",
-            "${widget.username}",
-            widget.logindata,
             data,
             index);
       },
@@ -174,8 +172,6 @@ class _homePageState extends State<homePage>
     String price,
     String link,
     String isbn13,
-    String username,
-    SharedPreferences logindata,
     BooksModel data,
     int index,
   ) {
@@ -188,8 +184,6 @@ class _homePageState extends State<homePage>
           MaterialPageRoute(
             builder: (context) {
               return bookDetailPage(
-                username: username,
-                logindata: logindata,
                 data: data,
                 index: index,
                 isbn13: isbn13,

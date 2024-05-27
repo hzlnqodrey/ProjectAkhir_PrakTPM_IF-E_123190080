@@ -11,16 +11,12 @@ import '../models/books_data_source.dart';
 import 'package:cobata/models/BookDetailModel.dart';
 
 class bookDetailPage extends StatefulWidget {
-  final String username;
-  final SharedPreferences logindata;
   final BooksModel data;
   final int index;
   final String isbn13;
 
   const bookDetailPage({
     Key? key,
-    required this.username,
-    required this.logindata,
     required this.data,
     required this.index,
     required this.isbn13,
@@ -50,7 +46,7 @@ class _bookDetailPageState extends State<bookDetailPage> {
           backgroundColor: Color.fromARGB(255, 37, 85, 50),
         ),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25.0),
+          padding: const EdgeInsets.symmetric(vertical: 35.0),
           child: ElevatedButton(
             onPressed: () async {
               final url =
@@ -97,12 +93,12 @@ class _bookDetailPageState extends State<bookDetailPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 15.0, vertical: 10),
+                                  horizontal: 5.0, vertical: 5),
                               child: Container(
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage("assets/overlay.png"),
-                                    fit: BoxFit.fitHeight,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
@@ -163,6 +159,31 @@ class _bookDetailPageState extends State<bookDetailPage> {
                                           ),
                                         ),
                                       ),
+                                      SizedBox(height: 5),
+                                      DecoratedBox(
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(
+                                              width: 5,
+                                              color: Colors.white,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(1))),
+                                        child: Text(
+                                          "Price: " +
+                                              (data.price == null
+                                                  ? "Unknown"
+                                                  : data.price ?? ""),
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.lato(
+                                            textStyle: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.green[400],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -176,7 +197,7 @@ class _bookDetailPageState extends State<bookDetailPage> {
                                                 "Rating",
                                                 style: GoogleFonts.lato(
                                                   textStyle: TextStyle(
-                                                    fontSize: 15,
+                                                    fontSize: 12,
                                                     color: Colors.grey[400],
                                                   ),
                                                 ),
@@ -208,7 +229,7 @@ class _bookDetailPageState extends State<bookDetailPage> {
                                                 "Pages",
                                                 style: GoogleFonts.lato(
                                                   textStyle: TextStyle(
-                                                    fontSize: 15,
+                                                    fontSize: 12,
                                                     color: Colors.grey[400],
                                                   ),
                                                 ),
@@ -224,7 +245,7 @@ class _bookDetailPageState extends State<bookDetailPage> {
                                                 style: GoogleFonts.lato(
                                                   textStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 15,
+                                                    fontSize: 12,
                                                     color: Colors.white,
                                                   ),
                                                 ),
@@ -237,7 +258,7 @@ class _bookDetailPageState extends State<bookDetailPage> {
                                                 "Publisher",
                                                 style: GoogleFonts.lato(
                                                   textStyle: TextStyle(
-                                                    fontSize: 15,
+                                                    fontSize: 12,
                                                     color: Colors.grey[400],
                                                   ),
                                                 ),
@@ -254,7 +275,7 @@ class _bookDetailPageState extends State<bookDetailPage> {
                                                 style: GoogleFonts.lato(
                                                   textStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 15,
+                                                    fontSize: 12,
                                                     color: Colors.white,
                                                   ),
                                                 ),
@@ -267,7 +288,7 @@ class _bookDetailPageState extends State<bookDetailPage> {
                                                 "Publish date",
                                                 style: GoogleFonts.lato(
                                                   textStyle: TextStyle(
-                                                    fontSize: 15,
+                                                    fontSize: 12,
                                                     color: Colors.grey[400],
                                                   ),
                                                 ),
@@ -284,7 +305,7 @@ class _bookDetailPageState extends State<bookDetailPage> {
                                                 style: GoogleFonts.lato(
                                                   textStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 13,
+                                                    fontSize: 12,
                                                     color: Colors.white,
                                                   ),
                                                 ),
