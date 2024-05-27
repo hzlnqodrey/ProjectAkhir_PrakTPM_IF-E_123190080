@@ -102,7 +102,7 @@ class _bookDetailPageState extends State<bookDetailPage> {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage("assets/overlay.png"),
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fitHeight,
                                   ),
                                 ),
                               ),
