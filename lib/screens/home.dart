@@ -1,3 +1,4 @@
+import 'package:cobata/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,10 +7,12 @@ import '../services/providers/search.dart';
 import 'profil_page.dart';
 import '../models/BooksModel.dart';
 import '../models/books_data_source.dart';
+import 'package:cobata/screens/book_detail.dart';
 
 class homePage extends StatefulWidget {
   final String username;
   final SharedPreferences logindata;
+
   const homePage({Key? key, required this.username, required this.logindata})
       : super(key: key);
 
@@ -155,55 +158,96 @@ class _homePageState extends State<homePage>
             "${data.books?[index].pic}",
             "${data.books?[index].title}",
             "${data.books?[index].price}",
-            "${data.books?[index].link}");
+            "${data.books?[index].link}",
+            "${data.books?[index].isbn13}",
+            "${widget.username}",
+            widget.logindata,
+            data,
+            index);
       },
     );
   }
 
-  Widget _buildItemBooks(String pic, String title, String price, String link) {
+  Widget _buildItemBooks(
+    String pic,
+    String title,
+    String price,
+    String link,
+    String isbn13,
+    String username,
+    SharedPreferences logindata,
+    BooksModel data,
+    int index,
+  ) {
+    late bool isFavorite = false;
     return InkWell(
-      child: Card(
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.black, width: 1),
-            borderRadius: BorderRadius.circular(8),
+      onTap: () {
+        print("ISBN13: $isbn13");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return bookDetailPage(
+                username: username,
+                logindata: logindata,
+                data: data,
+                index: index,
+                isbn13: isbn13,
+              );
+            },
           ),
-          child: Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Column(children: [
-                Container(
-                  width: double.infinity,
-                  height: 160,
-                  child: Image.network(pic, fit: BoxFit.cover),
+        );
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Colors.black, width: 1),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 160,
+                child: Image.network(pic, fit: BoxFit.cover),
+              ),
+              SizedBox(height: 10.0),
+              Expanded(
+                child: Text(
+                  title,
+                  overflow: TextOverflow.visible,
+                  textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 10.0),
-                Expanded(
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.center,
                   child: Text(
-                    title,
-                    overflow: TextOverflow.visible,
-                    textAlign: TextAlign.center,
+                    price,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
                   ),
                 ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(price,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green,
-                        )),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _launchURL(link);
+                  },
+                  child: Text("Buy"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple[50],
                   ),
                 ),
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        _launchURL(link);
-                      },
-                      child: Text("Buy"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.purple[50],
-                      )),
-                )
-              ]))),
+              ),
+              SizedBox(height: 10.0),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

@@ -7,6 +7,13 @@ class BookDataSource {
   }
 }
 
+class BookDetailSource {
+  static BookDetailSource instance = BookDetailSource();
+  Future<Map<String, dynamic>> loadBookDetail(String isbn13) {
+    return BaseNetwork.get("books/${isbn13}");
+  }
+}
+
 class BookSearch{
   static BookSearch instance = BookSearch();
   Future<Map<String, dynamic>> searchBooks(String search) {
